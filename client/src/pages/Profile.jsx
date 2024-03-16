@@ -17,8 +17,8 @@ import {
   deleteUserSuccess,
   signOutUserStart,
 } from '../redux/user/userSlice';
-import { useDispatch } from 'react-redux';
-import { current } from '@reduxjs/toolkit';
+
+
 
 export default function Profile() {
   const fileRef = useRef(null);
