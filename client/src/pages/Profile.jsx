@@ -17,6 +17,7 @@ import {
   deleteUserSuccess,
   signOutUserStart,
 } from '../redux/user/userSlice';
+import { Link } from 'react-router-dom'
 
 
 
@@ -105,12 +106,12 @@ export default function Profile() {
     try {
       dispatch(deleteUserStart())
 
-      const res = await fetch (`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
       });
       const data = await res.json();
 
-      if(data.success === false) {
+      if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
         return
       }
@@ -123,10 +124,10 @@ export default function Profile() {
   const handleSignout = async () => {
     try {
       dispatch(signOutUserStart())
-      const res = await fetch ('/api/auth/signout');
+      const res = await fetch('/api/auth/signout');
       const data = await res.json();
 
-      if (data.success === false ){
+      if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
         return
       };
@@ -172,7 +173,7 @@ export default function Profile() {
           placeholder='username'
           defaultValue={currentUser.username}
           id='username'
-          className='border p-3 rounded-lg' 
+          className='border p-3 rounded-lg'
           onChange={handleChange}
         />
 
@@ -181,7 +182,7 @@ export default function Profile() {
           placeholder='email'
           defaultValue={currentUser.email}
           id='email'
-          className='border p-3 rounded-lg' 
+          className='border p-3 rounded-lg'
           onChange={handleChange}
         />
 
@@ -189,11 +190,17 @@ export default function Profile() {
           type="password"
           placeholder='password'
           id='password'
-          className='border p-3 rounded-lg' 
+          className='border p-3 rounded-lg'
           onChange={handleChange}
         />
 
         <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'>{loading ? 'Loading...' : 'Update'}</button>
+
+        <Link
+          className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
+          to={'/create-listing'}>
+          Create Listing
+        </Link>
 
       </form>
 
